@@ -1,7 +1,12 @@
 <script src="http://www.webglearth.com/api.js"></script>
 <script>
   function initialize() {
-    var options = { zoom: 3.0, position: [47.19537,8.524404] };
+    var options = {
+        zoom: {{webgl.zoom}},
+        position: [{{webgl.center.0}}, {{webgl.center.1}}],
+        atmosphere: {{webgl.atmosphere}},
+        map: {{webgl.map_type}}
+    };
     var earth = new WebGLEarth('earth_div', options);
   }
 </script>
