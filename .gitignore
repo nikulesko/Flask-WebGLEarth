@@ -1,0 +1,9 @@
+*.log
+*.pot
+*.pyc
+
+# OSX
+.DS_Store
+
+#PyCharm
+.idea
