@@ -3,20 +3,24 @@
 from flask import render_template, Blueprint, Markup
 
 
-map_types = ['WebGLEarth.Maps.OSM', 'WebGLEarth.Maps.MAPQUEST']
+MAP_TYPES = {'osm': 'WebGLEarth.Maps.OSM', 'mapquest': 'WebGLEarth.Maps.MAPQUEST'}
 
 
 class WebGlEarth(object):
-    def __init__(self, zoom=5, center=None, map_type=map_types[0],
-                 atmosphere=False, markers=None):
+    def __init__(self, zoom=5, center=None, map_type=MAP_TYPES.get('osm'),
+                 atmosphere=False, markers=None, polygons=None):
         self.zoom = zoom
         self.center = center or []
         self.map_type = map_type
         self.atmosphere = str(atmosphere).lower()
         self.markers = markers
+        self.polygons = polygons or []
 
     def add_marker(self, marker):
-        self.markers.append(marker)
+        self.polygons.append(marker)
+
+    def add_polygon(self, polygon):
+        self.markers.append(polygon)
 
     def render(self, *args, **kwargs):
         return render_template(*args, **kwargs)
@@ -53,3 +57,11 @@ class Marker(object):
         self.lat = lat
         self.lng = lng
         self.info_window = info_window
+
+
+class Polygon(object):
+    def __init__(self, coordinates=None, fill_color="#ff0000",
+                 fill_opacity=.3):
+        self.coordinates = coordinates or []
+        self.fill_color = fill_color
+        self.fill_opacity = fill_opacity

@@ -15,5 +15,21 @@
         var marker_{{loop.counter}} = earth.initMarker(lat, lng);
         marker_{{loop.counter}}.bindPopup('{{marker.info_window}}');
     {% endfor %}
+
+    {% for polygon in webgl.polygons %}
+        var polygon_{{loop.counter}} = new WebGLEarth.Polygon(earth);
+
+        {% for coordinate in polygon.coordinates %}
+            var lat = {{coordinate.0}};
+            var lng = {{coordinate.1}};
+            polygon_{{loop.counter}}.addPoint(lat, lng);
+        {% endfor %}
+
+        var fillColor = '{{polygon.fill_color}}';
+        var fillOpacity = {{polygon.fill_opacity}};
+        polygon_{{loop.counter}}.setFillColor(fillColor, fillOpacity);
+        polygon_{{loop.counter}}.disableClickToAdd();
+        polygon_{{loop.counter}}.showDraggers(false);
+    {% endfor %}
   }
 </script>
