@@ -7,12 +7,16 @@ map_types = ['WebGLEarth.Maps.OSM', 'WebGLEarth.Maps.MAPQUEST']
 
 
 class WebGlEarth(object):
-    def __init__(self, zoom=5, center=[], map_type=map_types[0],
-                 atmosphere=False):
+    def __init__(self, zoom=5, center=None, map_type=map_types[0],
+                 atmosphere=False, markers=None):
         self.zoom = zoom
         self.center = center or []
         self.map_type = map_type
         self.atmosphere = str(atmosphere).lower()
+        self.markers = markers
+
+    def add_marker(self, marker):
+        self.markers.append(marker)
 
     def render(self, *args, **kwargs):
         return render_template(*args, **kwargs)
@@ -42,3 +46,10 @@ class WebGl(object):
                            template_folder="templates")
         app.register_blueprint(module)
         return module
+
+
+class Marker(object):
+    def __init__(self, lat, lng, info_window=""):
+        self.lat = lat
+        self.lng = lng
+        self.info_window = info_window

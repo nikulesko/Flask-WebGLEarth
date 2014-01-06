@@ -8,5 +8,12 @@
         map: {{webgl.map_type}}
     };
     var earth = new WebGLEarth('earth_div', options);
+
+    {% for marker in webgl.markers %}
+        var lat = {{marker.lat}};
+        var lng = {{marker.lng}};
+        var marker_{{loop.counter}} = earth.initMarker(lat, lng);
+        marker_{{loop.counter}}.bindPopup('{{marker.info_window}}');
+    {% endfor %}
   }
 </script>
