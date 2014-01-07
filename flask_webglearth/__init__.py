@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding: utf8
 
 from flask import render_template, Blueprint, Markup
 
@@ -27,7 +27,7 @@ class WebGlEarth(object):
 
     @property
     def js(self):
-        return Markup(self.render('webgljs.html', webgl=self))
+        return Markup(self.render('weglearth/webgljs.html', webgl=self))
 
 
 def webgl_map_obj(*args, **kwargs):

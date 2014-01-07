@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding: utf8
 from flask import Flask, render_template
 from flask_webglearth import WebGlEarth, WebGl, MAP_TYPES, Marker, Polygon
 
